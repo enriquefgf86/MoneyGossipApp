@@ -1,0 +1,36 @@
+<div class="container" id='containerLogin'>
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div id='formLogIn' class="col-md-6">
+        <form [formGroup]="ngForm" (submit)="logIn()">
+
+
+          <div class="form-group col-md-12 mx-auto">
+            <label for="emailUser">Email</label>
+            <input type="email" class="form-control" id="emailUser" placeholder="Email" formControlName="emailUser"
+              required>
+              <!-- <app-control-messages [control]="ngForm.get('emailUser')"></app-control-messages> -->
+          </div>
+
+          <div class="form-group col-md-12 mx-auto">
+            <label for="passwordUser">Password</label>
+            <input type="password" formControlName="passwordUser" id="inputControl" class="form-control"
+              id="passwordUser" placeholder="Password" required>
+              <!-- <app-control-messages [control]="ngForm.get('passwordUser')"></app-control-messages> -->
+          </div>
+
+          <div id='buttonLine'>
+
+            <button type="submit"  class="btn btn-success">Sign in</button>
+            <button (click)='closeSign()' class="btn btn-danger">Cancel</button>
+
+
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

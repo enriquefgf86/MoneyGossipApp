@@ -1,0 +1,62 @@
+<div class="container" id='containerSignUp'>
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-6  ">
+        <!-- //aqui -->
+        <form id='formSignUp' [formGroup]='ngForm' (submit)="signUp()">
+          <img [src]='defaultImage' width='80' height='80' (click)='imageUpload.click()'>
+          <div class="form-group col-md-12 mx-auto">
+            <label for="imageUser">Upload image</label>
+            <input type="file" class="form-control" id="imageUser" placeholder="Select image"
+              formControlName="imageUser" #imageUpload (change)="selectImg($event) " accept='image/**'>
+          </div>
+
+          <div class="form-group col-md-12 mx-auto">
+            <label for="nameUser">Name and Last Name</label>
+            <input type="text" formControlName="nameUser" class="form-control" id="nameUser"
+              placeholder="Name and Last Name" minlength="6" required>
+          </div>
+          <!-- <app-control-messages [control]="ngForm.get('nameUser')"></app-control-messages> -->
+
+
+          <div class="form-group col-md-12 mx-auto">
+            <label for="emailUser">Email</label>
+            <input type="email" class="form-control" id="emailUser" placeholder="Email" formControlName="emailUser"
+              pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+          </div>
+          <div [hidden]="!ngForm.value.emailUser.errors?.required" class="invalid-feedback">
+            Required Email
+          </div>
+          <div [hidden]="!ngForm.value.emailUser.errors?.pattern" class="invalid-feedback">
+            Invalid Email
+          </div>
+          <!-- <app-control-messages [control]="ngForm.get('emailUser')"></app-control-messages> -->
+
+          <div class="form-group col-md-12 mx-auto">
+            <label for="passwordUser">Password</label>
+            <input type="password" formControlName="passwordUser" class="form-control" id="passwordUser"
+              placeholder="Password" minlength="6" required>
+          </div>
+          <!-- <app-control-messages [control]="ngForm.get('passwordUser')"></app-control-messages> -->
+
+          <div class="form-group col-md-12 mx-auto">
+            <label for="confirmPasswordUser">Confirm Password</label>
+            <input type="password" name="confirmPasswordUser" class="form-control" id="confirmPasswordUser"
+              placeholder="Confirm Password" required>
+          </div>
+          <!-- <app-control-messages [control]="ngForm.get('confirmPasswordUser')"></app-control-messages> -->
+
+          <div id='buttonLine'>
+
+            <button type="submit" class="btn btn-success">Sign Up</button>
+            <button (click)='closeSuscription()' class="btn btn-danger">Cancel</button>
+
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,206 @@
+<section>
+  <div class='container' id='balanceCont'>
+    <a class='d-flex justify-content-center align-items-center'  (click)='routingBalance()'>Go Balance  <img width='20' height='20' src='../../../assets/imgs/finance.png'/></a>
+    <h1 class='d-flex justify-content-center align-items-center'>Balance: {{amountInAccount | currency:"MXN":"$"}}</h1>
+
+    <div id="allin">
+      <div id='selectDiv'>
+        <div id="selects">
+          <h3 class="d-flex  justify-content-center">Select Type :</h3>
+          <h3>
+            <select id="selectDrop" name="options" [(ngModel)]="options" required (change)="itemSelected($event)">
+              <option value="select" [ngValue]="null" value="noSelected" [disabled]="true">Select</option>
+              <option value="Expenses">Expenses</option>
+              <option value="Incomings">Incomings</option>
+            </select>
+          </h3>
+        </div>
+      </div>
+
+      <div id='subDrop' [hidden]="!show">
+
+        <select id="selectDrop" *ngIf='state==="Expenses" ' name="optionsExp" required [(ngModel)]="optionsExp"
+          (change)="subItemSelected($event)">
+          <option value="select" [ngValue]="null" [disabled]="true">Select Expense</option>
+          <option data-toggle="modal" data-target="#editItem" *ngFor="let item of allExpensesKeys" label="{{item}}"
+            value="{{item}}">
+          </option>
+        </select>
+
+        <button hidden #open href="#" class="btn btn-primary btn-block" data-toggle="modal"
+          data-target="#editItem">{{expenseSelected}}</button>
+
+
+        <select id="selectDrop" *ngIf='state==="Incomings"' name="optionsInc" required [(ngModel)]="optionsInc"
+          (change)="subItemSelected($event)">
+          <option value="select" [ngValue]="null" [disabled]="true">Select Income</option>
+          <option *ngFor="let item of allIncomingsKeys" label="{{item}}" value="{{item}}"><a data-toggle="modal"
+              data-target="#editItem" href="#">{{item}}</a></option>
+        </select>
+        <img *ngIf="show" (click)='showChanger()' width='40' height='40' src="/assets/imgs/plus.png" alt="plus">
+
+        <button hidden #open class="btn btn-primary btn-block" data-toggle="modal"
+          data-target="#editItem">{{incomeSelected}}</button>
+
+      </div>
+      <h3 class="d-flex  justify-content-center" *ngIf="!show">
+        Or
+      </h3>
+      <h3 *ngIf="!show" class="d-flex  justify-content-center"><a type='button' data-toggle='modal'
+          data-target='#addItem'>Add New
+          Item <img width='40' height='40' src="/assets/imgs/plus.png" alt="plus"></a> </h3>
+
+
+    </div>
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+<section>
+
+  <div class="modal fade" id="editItem">
+    <div class="modal-dialog modal-md">
+      <div id="formComplete" class="modal-content">
+
+        <div id="headerForm" class="modal-header bg-success text-white">
+          <h1 class="modal-title">
+            Add {{incomeSelected?incomeSelected:expenseSelected}}
+
+          </h1>
+          <button class="close" data-dismiss="modal" #close>
+            <img width='40' height='40' src="/assets/imgs/close.png" alt="plus">
+          </button>
+        </div>
+
+        <form id='form' [formGroup]="importNgForm" (submit)="addUniqueImport()">
+          <div class="modal-body">
+
+            <div class="form-group">
+              <label for="type">Type: {{state}}</label>
+              <input style='display:none' type="text" name="type" class="form-control" formControlName="type"
+                [(ngModel)]='state' />
+
+            </div>
+
+            <div class="form-group">
+              <label for="previous">Import: {{incomeSelected?incomeSelected:expenseSelected}}</label>
+              <input [readOnly]=true id="selectDrop" type="number" name="previous" class="form-control"
+                formControlName="previous" [(ngModel)]='preInf' />
+
+            </div>
+
+
+
+            <div class="form-group" *ngIf='state==="Expenses"'>
+              <label for="key"></label>
+              <input id="selectDrop" [readOnly]=true type="text" [(ngModel)]="expenseSelected" name="key"
+                class="form-control" formControlName="key" />
+            </div>
+
+            <div class="form-group" *ngIf='state==="Incomings"'>
+              <label for="key"></label>
+              <input id="selectDrop" [readOnly]=true type="text" [(ngModel)]="incomeSelected" name="key"
+                class="form-control" formControlName="key" />
+            </div>
+
+            <div class="form-group">
+              <label for="import">Add Amount</label>
+              <input id="selectDrop" type="number" name="import" class="form-control" formControlName="import" />
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success">Add</button>
+          </div>
+
+          <div class="modal-footer">
+            <button #close class="btn btn-danger">Cancel</button>
+          </div>
+        </form>
+
+
+      </div>
+
+
+
+    </div>
+  </div>
+
+</section>
+
+
+<section>
+  <div class="modal fade" id="addItem">
+    <div class="modal-dialog modal-md">
+      <div id="formComplete" class="modal-content">
+
+        <div id="headerForm" class="modal-header bg-success text-white">
+          <h1 class="modal-title">
+            Add New Concept
+
+          </h1>
+          <button class="close" data-dismiss="modal" #closeAdd>
+            <img width='40' height='40' src="/assets/imgs/close.png" alt="plus">
+          </button>
+        </div>
+
+        <form id='form' [formGroup]="addNewNgForm" (submit)="addNewConcept()">
+          <div class="modal-body">
+
+            <div class="form-group ">
+              <label for="Type">Add Concept </label>
+              <div class="d-flex flex-row">
+                <div class='d-flex flex-row' id="radioType">
+                  <h4>Income</h4>
+                  <input id="radio" type="radio" value='Incomings' name="Type" class="form-control"
+                    placeholder="Incomings" formControlName="Type" checked />
+                </div>
+
+                <div class='d-flex flex-row' id="radioType">
+                  <h4>Expense</h4>
+                  <input id="radio" type="radio" value='Expenses' name="Type" class="form-control"
+                    placeholder="Expenses" formControlName="Type" />
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="form-group">
+              <label for="newKey">Add Concept of Import</label>
+              <input id="selectDrop" type="text" name="newKey" class="form-control" formControlName="newKey" />
+            </div>
+
+
+            <div class="form-group">
+              <label for="newImport">Add Amount</label>
+              <input id="selectDrop" type="number" name="newImport" class="form-control" formControlName="newImport" />
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button #closeAdd type="submit" class="btn btn-success">Add New Item</button>
+          </div>
+
+          <div class="modal-footer">
+            <button #closeAdd class="btn btn-danger">Cancel</button>
+          </div>
+        </form>
+
+
+      </div>
+
+
+
+    </div>
+  </div>
+</section>

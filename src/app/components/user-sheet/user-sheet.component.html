@@ -1,0 +1,68 @@
+<div class="container">
+
+  <div class="container" id='containerWidth'>
+    <div class="row" id="rowUser">
+      <div class="container" id='containerOps'>
+        <div class="col mb-3">
+          <h3>Operations</h3>
+          <div id='buttonsContainer'>
+            <button id="button" class="btn btn-success" (click)="editAccounts()">Edit Balance</button>
+            <button class="btn btn-success" (click)="resetSave()">Reset & Save</button>
+          </div>
+
+        </div>
+
+
+
+        <div class='container' >
+          <div class="row" >
+            <div class='col-md-6' id=rowsItems>
+              <div>
+                <h6>For Expense : {{expensesTotal|currency:'CAD':'$':'0.2-2'}}</h6>
+              </div>
+              <table id='table' class="table table-striped">
+                <thead class="thead-dark">
+                  <th>Item</th>
+                  <th>Expense</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let items of  allExpenses|keyvalue">
+                    <td> {{items.key}}</td>
+                    <td> {{items.value |currency:'CAD':'$':'0.2-2'}}</td>
+                  </tr>
+
+                </tbody>
+              </table>
+              <!-- <div *ngFor="let items of  allExpenses|keyvalue">
+                {{items.key}}: {{items.value |currency:'CAD':'$':'0.2-2'}}
+              </div> -->
+            </div>
+
+            <div class='col-md-6' id=rowsItems>
+              <div>
+                <h6>For Incomings :{{incomingsTotal|currency:'CAD':'$':'0.2-2'}}</h6>
+              </div>
+              <table id='table' class="table table-striped">
+                <thead class="thead-dark">
+                  <th>Item</th>
+                  <th>Income</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let items of allIncomings|keyvalue">
+                    <td> {{items.key}}</td>
+                    <td> {{items.value |currency:'CAD':'$':'0.2-2'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- <div *ngFor="let items of  allIncomings|keyvalue">
+                {{items.key}}: {{items.value |currency:'CAD':'$':'0.2-2'}}
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

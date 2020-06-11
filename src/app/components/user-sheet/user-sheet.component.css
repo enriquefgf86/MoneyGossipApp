@@ -1,0 +1,58 @@
+#containerOps{
+  display:flex;
+  flex-direction: column;
+  justify-content:center;
+  /* align-items: center; */
+
+}
+#containerWidth{
+  height:15rem;
+  overflow-y: auto;
+  box-shadow: 3px 2px 1px 2px;
+  border:solid black;
+  border-radius:10px;
+  background-color:#D5F3FE
+
+}
+#table{
+  background-color:rgba(255,255,255, 1)
+}
+#rowUser{
+  /* display:flex;
+  justify-content:center; */
+}
+#rowsItems{
+  width:15rem;
+
+}
+h3{
+
+    display:flex;
+    justify-content:center;
+
+}
+h6{
+
+  display:flex;
+  justify-content:center;
+
+}
+#tableContainer{
+  display:flex;
+    justify-content:center;
+    flex-direction:row
+}
+#containerTables{
+  display:flex;
+    justify-content:center;
+    flex-direction:row;
+    width:35rem;
+}
+#buttonsContainer{
+  display:flex;
+    justify-content:space-around;
+    flex-direction:row;
+    flex-wrap:wrap;
+
+}
+

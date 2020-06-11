@@ -1,0 +1,38 @@
+<nav id ="nav"  >
+  <img id="logoImg"style="margin-left:1rem" width='130' height='110' src="/assets/imgs/logo.png">
+
+  <div >
+    <button class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#lessMd"
+      aria-controls="lessMd" aria-expanded="false" aria-label="Toggle navigation"><img width='40' height='40' src="/assets/imgs/toggler.png" alt="toggle">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="d-flex justify-content-end" >
+      <a class="d-none d-md-block nav-link nav-item active" routerLink='/welcome'><img width='40' height='40' src="/assets/imgs/home.png" alt="home"></a>
+
+      <a *ngIf="userAuthState" class="d-none d-md-block nav-link nav-item active" href='#' (click)='logOut()'><button  type="button" class="btn btn-success">Log Out</button>
+        </a>
+      <a *ngIf="!userAuthState" class="d-none d-md-block nav-link nav-item active" routerLink='login'><button  type="button" class="btn btn-success">Log In</button></a>
+      <a *ngIf="!userAuthState" class="d-none d-md-block nav-link nav-item active" routerLink='signup'><button  type="button" class="btn btn-success">Sign Up</button></a>
+
+    </div>
+
+  </div>
+  <div class="collapse navbar-collapse d-md-none" id="lessMd">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0 d-md-none">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink='/welcome'><img style="margin-left:1rem" width='30' height='30' src="/assets/imgs/home.png" alt="home"> <span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item" *ngIf="userAuthState">
+        <a (click)='logOut()'><img  style="margin-left:1rem" width='30' height='30' src="/assets/imgs/exit.png" alt="exit"></a>
+      </li>
+      <li *ngIf="!userAuthState" class="nav-item">
+        <a routerLink='login'><img  style="margin-left:1rem" width='30' height='30' src="/assets/imgs/login.png" alt="login"></a>
+      </li>
+      <li *ngIf="!userAuthState" class="nav-item">
+        <a routerLink='signup'><img style="margin-left:1rem;margin-top:0.4rem" width='30' height='30' src="/assets/imgs/signup.png" alt="sign"></a>
+      </li>
+    </ul>
+
+  </div>
+</nav>

@@ -1,0 +1,143 @@
+<section>
+
+  <!-- <div class="col-sm-12 mx-auto my-auto"> -->
+
+  <div class="container" >
+    <div class="row">
+      <div class="col-sm-6 mx-auto my-auto ">
+
+        <div class="card" id="cardC">
+          <div class="card-body" id='cardElements'>
+            <img *ngIf="userId" [attr.src]='image' alt='avatar' id='avatar'>
+
+
+            <div id='cardElements'>
+              <h5>Welcome:</h5>
+              <h4>{{resumeAccount.allDetails }}</h4>
+            </div>
+
+            <h5 class="card-title">Your Account Resume</h5>
+
+            <div>
+              <div id='cardDet'>
+                <h2 id="amount">Amount:</h2>
+                <h1 id="amount">
+                  <h1 id='number'>{{resumeAccount.amountInAccount |currency:'CAD':'$':'0.2-2'}}</h1>
+                </h1>
+              </div>
+            </div>
+
+            <button [hidden]='!changeState' (click)="userSheet()" class="btn btn-success">Show Details</button>
+            <button [hidden]='!showBal' class="btn btn-success" (click)="showState()">Show Details</button>
+
+          </div>
+          <div *ngIf="allDatesBalance.length>0" class='d-flex flex-column align-items-center'>
+
+            <h5>Your previous balances</h5>
+
+            <select name="prevBalances" id="selectDrop" required [(ngModel)]="balances"
+              (change)="balanceSelected($event)">
+              <option value="select" [disabled]=true>Select Date</option>
+              <option value="" data-toggle="modal" data-target="#balanceSelected" *ngFor="let item of allDatesBalance"
+                label="Balance of {{ item | date:'MM/dd/yyyy'}}" value="{{item}}"></option>
+            </select>
+
+            <button hidden #openBalance href="#" class="btn btn-primary btn-block" data-toggle="modal"
+              data-target="#balanceSelected">{{dateSelected}}</button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-sm-6 mx-auto my-auto">
+
+        <!-- <button [hidden]='!showBal' class="btn btn-success" (click)="showState()">Show</button> -->
+        <div [hidden]='showBal' id='balanceFormat' >
+
+          <button *ngIf="!changeState" [hidden]='showBal' class="btn btn-success mb-4 mt-4" (click)="hideState()">Hide
+            Details
+          </button>
+
+          <div class="row" id='userSheet'>
+            <router-outlet></router-outlet>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <!-- //ends row -->
+  </div>
+  <!-- //ends container -->
+</section>
+
+<div class="modal fade" id="balanceSelected">
+  <div class="modal-dialog modal-md">
+    <div id="formComplete" class="modal-content">
+
+      <div id="headerForm" class="modal-header bg-success text-white">
+        <h1 class="modal-title"> Balance </h1>
+        <button class="close" data-dismiss="modal" #close>
+          <img width='40' height='40' src="/assets/imgs/close.png" alt="plus">
+        </button>
+      </div>
+
+      <form id='form'>
+        <!-- <div *ngIf="getInf">
+          <div *ngFor="let item of Object.keys(getInf)">
+            <h3 class="d-flex flex-row">{{item}}</h3>
+            <div *ngFor="let subItem of Object.keys(getInf[item])">
+              <h6>{{subItem}}</h6>
+              <h6>{{getInf[item][subItem]|json}}</h6>
+            </div>
+          </div>
+        </div> -->
+
+        <div *ngIf="getInf">
+          <div class="container">
+            <div class="container">
+              <div>On Date: {{selected | date:'MM/dd/yyyy'}}</div>
+              <div id='printModal'>
+
+                <div id='printModalColumn'>
+                  <h3>Expenses</h3>
+                  <div *ngFor="let item of Object.keys(getInf.Expenses)">
+                    <div id='itemsPerColumn'>
+                      <h6>{{item}}</h6>
+                      <h6>{{getInf.Expenses[item]|json|currency:'CAD':'$':'0.2-2'}}</h6>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div id='printModalColumn'>
+                  <h3>Incomes</h3>
+                  <div *ngFor="let item of Object.keys(getInf.Incomes)">
+                    <div id='itemsPerColumn'>
+                      <h6>{{item}}</h6>
+                      <h6>{{getInf.Incomes[item]|json|currency:'CAD':'$':'0.2-2'}}</h6>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button (click)='printBalance()' class="btn btn-success">Print</button>
+        </div>
+
+        <div class="modal-footer">
+          <button #close (click)="closePopBalanceModal()" class="btn btn-danger">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+
+
+  </div>
+</div>

@@ -1,0 +1,11 @@
+#containerFooter
+{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+#colorFooter
+{
+
+  background-color: rgba(176, 224, 230,.5);
+}

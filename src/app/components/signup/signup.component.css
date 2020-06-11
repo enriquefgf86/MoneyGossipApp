@@ -1,0 +1,23 @@
+#formSignUp{
+  box-shadow: 2px 1px 4px 2px;
+  border-radius:10px;
+  padding-bottom:.3rem;
+  padding-left:.3rem;
+  padding-right:.3rem;
+  background-color:#D5F3FE
+}
+
+#containerSignUp{
+  margin-top:4rem;
+  margin-bottom:4rem;
+}
+.form-control{
+  background-color: white!important
+}
+#buttonLine{
+  display:flex;
+  flex-direction:row;
+  justify-content: space-around;
+  margin-bottom:1rem;
+
+}
